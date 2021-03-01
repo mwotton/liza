@@ -1,0 +1,89 @@
+name:                liza
+version:             0.1.0.0
+github:              "mwotton/liza"
+license:             BSD3
+author:              "Mark Wotton"
+maintainer:          "mwotton@gmail.com"
+copyright:           "Mark Wotton"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+- deploy/*
+- verify/*
+- revert/*
+
+description:         Please see the README on GitHub at <https://github.com/mwotton/liza#readme>
+
+dependencies:
+- base-noprelude
+- relude
+
+- aeson
+- bytestring
+- exceptions
+- generics-sop
+- hashable
+- honeycomb
+- honeycomb-wai
+- http-types
+- microlens
+- microlens-mtl
+- monad-logger
+- postgres-options
+- postgresql-libpq
+- random
+- roboservant
+- squeal-postgresql
+- servant
+- servant-server
+- time
+- tmp-postgres >= 1.34.1.0
+- unliftio
+- unordered-containers
+- wai
+- wai-middleware-auth
+
+# test-only dependencies: ghcide can't detect it yet, sadly
+# https://github.com/digital-asset/ghcide/issues/113
+- process
+- hspec
+- async
+- resource-pool
+# ghcide also can't seem to execute hspec-discover.
+# - hspec-discover
+
+
+
+library:
+  source-dirs: src
+
+executables:
+  server:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - liza
+    - honeycomb
+    - warp
+
+tests:
+  liza-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hedgehog
+    - directory
+    - hspec-hedgehog
+    - liza
+    - QuickCheck
+    - pretty-simple
+    - servant-validate

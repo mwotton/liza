@@ -1,0 +1,26 @@
+FROM fpco/stack-build:lts-15.11 as dependencies
+RUN mkdir /opt/build /opt/build/liza
+COPY stack.yaml stack.yaml.lock snapshot.yaml /opt/build/
+COPY liza/package.yaml /opt/build/liza/
+RUN cd /opt/build && stack build --system-ghc --dependencies-only
+
+FROM fpco/stack-build:lts-15.11 as build
+RUN apt update && apt -y install upx-ucl
+# grab these from clean deps build
+COPY --from=dependencies /root/.stack /root/.stack
+COPY . /opt/build
+RUN cd /opt/build && stack install --system-ghc && upx-ucl ~/.local/bin/server
+
+
+FROM heroku/heroku:18.nightly as server
+RUN mkdir -p /opt/liza
+ARG BINARY_PATH
+WORKDIR /opt/liza
+# could download these in a separate step if we cared.
+RUN apt-get update && apt-get install -y \
+  ca-certificates \
+  libgmp-dev libpq5
+COPY --from=build /root/.local/bin/server .
+# COPY static /opt/liza/static
+# COPY config /opt/liza/config
+CMD ["/opt/liza/server"]

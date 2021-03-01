@@ -1,0 +1,173 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 2e21335d6bfcfe65e61e586f5b26757b464ae443053c3efbfc030a02519f151f
+
+name:           liza
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/mwotton/liza#readme>
+homepage:       https://github.com/mwotton/liza#readme
+bug-reports:    https://github.com/mwotton/liza/issues
+author:         Mark Wotton
+maintainer:     mwotton@gmail.com
+copyright:      Mark Wotton
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/mwotton/liza
+
+library
+  exposed-modules:
+      API
+      Auth
+      Config
+      Env
+      Error
+      Lib
+      Manager
+      Prelude
+      Queries
+      Schema
+      Server
+      Types
+  other-modules:
+      Paths_liza
+  hs-source-dirs:
+      src
+  build-depends:
+      aeson
+    , async
+    , base-noprelude
+    , bytestring
+    , exceptions
+    , generics-sop
+    , hashable
+    , honeycomb
+    , honeycomb-wai
+    , hspec
+    , http-types
+    , microlens
+    , microlens-mtl
+    , monad-logger
+    , postgres-options
+    , postgresql-libpq
+    , process
+    , random
+    , relude
+    , resource-pool
+    , roboservant
+    , servant
+    , servant-server
+    , squeal-postgresql
+    , time
+    , tmp-postgres >=1.34.1.0
+    , unliftio
+    , unordered-containers
+    , wai
+    , wai-middleware-auth
+  default-language: Haskell2010
+
+executable server
+  main-is: Main.hs
+  other-modules:
+      Paths_liza
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , async
+    , base-noprelude
+    , bytestring
+    , exceptions
+    , generics-sop
+    , hashable
+    , honeycomb
+    , honeycomb-wai
+    , hspec
+    , http-types
+    , liza
+    , microlens
+    , microlens-mtl
+    , monad-logger
+    , postgres-options
+    , postgresql-libpq
+    , process
+    , random
+    , relude
+    , resource-pool
+    , roboservant
+    , servant
+    , servant-server
+    , squeal-postgresql
+    , time
+    , tmp-postgres >=1.34.1.0
+    , unliftio
+    , unordered-containers
+    , wai
+    , wai-middleware-auth
+    , warp
+  default-language: Haskell2010
+
+test-suite liza-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      AroundAll
+      CompileTimeApiSpec
+      DBHelpers
+      DBSpec
+      PreflightSpec
+      RoboservantSpec
+      Paths_liza
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , aeson
+    , async
+    , base-noprelude
+    , bytestring
+    , directory
+    , exceptions
+    , generics-sop
+    , hashable
+    , hedgehog
+    , honeycomb
+    , honeycomb-wai
+    , hspec
+    , hspec-hedgehog
+    , http-types
+    , liza
+    , microlens
+    , microlens-mtl
+    , monad-logger
+    , postgres-options
+    , postgresql-libpq
+    , pretty-simple
+    , process
+    , random
+    , relude
+    , resource-pool
+    , roboservant
+    , servant
+    , servant-server
+    , servant-validate
+    , squeal-postgresql
+    , time
+    , tmp-postgres >=1.34.1.0
+    , unliftio
+    , unordered-containers
+    , wai
+    , wai-middleware-auth
+  default-language: Haskell2010
