@@ -15,7 +15,7 @@ import Servant.Server (hoistServer)
 import System.Random
 import Queries
 import Data.Aeson
-
+import Types
 
 
 
@@ -25,6 +25,7 @@ server :: ServerT API App
 server = genericServerT $ Routes
   { failWithChance = failer
   , fetchByEndpoint = fetcher
+  , healthcheck = healthcheck'
   }
 --  where run = liftIO . runApp e
 
@@ -42,6 +43,11 @@ failer failChance key clientId body =  do
 
 
 fetcher key = runDB $ getRows =<< executeParams fetchRequestByEndpoint (Only key)
+
+
+healthcheck' = runDB $ do
+  multideliveries <- getRows =<< execute fetchMultipleDeliveries
+  pure $ fmap PMultipleDelivery multideliveries
 
 hoistedServer env = hoistServer api (nt env) server
 

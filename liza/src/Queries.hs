@@ -13,7 +13,7 @@ module Queries where
 
 import Schema (DB)
 import Squeal.PostgreSQL hiding (name)
-import Types (RequestLog)
+import Types
 import Data.Time(UTCTime)
 import qualified Data.ByteString.Lazy as L
 
@@ -39,3 +39,14 @@ fetchRequestByEndpoint = query q
            & where_ (#requests ! #endpoint .== param @1)
            & orderBy [Asc #created_at]
           )
+
+fetchMultipleDeliveries :: Statement DB () MultipleDelivery
+fetchMultipleDeliveries = query q
+  where
+    q :: Query_ DB () MultipleDelivery
+    q = select_
+      (#endpoint `as` #targeted_endpoint
+       :* #client_id `as` #attempt_id)
+      (from (table (#liza ! #requests))
+      & groupBy (#endpoint :* #client_id :* #error_code)
+      & having (#error_code .== 200 .&& countStar .> 1))

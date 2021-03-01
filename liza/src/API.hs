@@ -31,6 +31,10 @@ data Routes route
         :- "fetchByEndpoint"
         :> Capture "key" Text
         :> Get '[JSON] [RequestLog]
+      , healthcheck
+        :: route
+        :- "healthcheck"
+        :> Get '[JSON] [Problem]
       }
   deriving (Generic)
 
