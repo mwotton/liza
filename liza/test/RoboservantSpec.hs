@@ -15,7 +15,7 @@ import Hedgehog
 import Test.Hspec
 import qualified Roboservant as RS
 import Env(Env)
-import Types(Foo)
+import Types
 
 defaultConfig :: RS.Config
 defaultConfig = RS.Config

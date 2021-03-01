@@ -38,19 +38,22 @@ type Composites =
 
 -- schema
 type Tables =
-  ( '[ "foos" ::: 'Table FoosTable
+  ( '[ "requests" ::: 'Table RequestsTable
      ] :: [(Symbol, SchemumType)]
   )
 
 -- defs
-type FoosColumns =
-  '[ "id" ::: 'Def :=> 'NotNull PGint4,
-     "name" ::: 'NoDef :=> 'NotNull PGtext
+type RequestsColumns =
+  '[ "id" ::: 'Def :=> 'NotNull PGint8,
+     "endpoint" ::: 'NoDef :=> 'NotNull PGtext,
+     "body" ::: 'NoDef :=> 'NotNull PGtext,
+     "error_code" ::: 'NoDef :=> 'NotNull PGint4,
+     "created_at" ::: 'Def :=> 'NotNull PGtimestamptz
    ]
 
-type FoosConstraints = '["foos_pkey" ::: 'PrimaryKey '["id"]]
+type RequestsConstraints = '["requests_pkey" ::: 'PrimaryKey '["id"]]
 
-type FoosTable = FoosConstraints :=> FoosColumns
+type RequestsTable = RequestsConstraints :=> RequestsColumns
 
 -- VIEWS
 type Views =

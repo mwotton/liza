@@ -1,4 +1,4 @@
--- Verify liza:index_name on pg
+-- Verify liza:requests on pg
 
 BEGIN;
 

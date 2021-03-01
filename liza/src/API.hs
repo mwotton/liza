@@ -13,8 +13,12 @@ type API = ToServantApi Routes
 
 data Routes route
   = Routes
-      { failWithChance :: route :-
-        "failWithChance" :> Capture "failChance" Double :> Post '[JSON] NoContent
+      { failWithChance
+        :: route
+        :- "failWithChance"
+        :> Capture "failChance" Double
+        :> Capture "key" Text
+        :> Post '[JSON] NoContent
       }
   deriving (Generic)
 

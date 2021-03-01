@@ -5,14 +5,15 @@ module Server where
 
 import           API                    (API, api, Routes (..))
 import           Manager                (App, runDB, runApp)
-import           Queries                (getAllFoosQ)
+--import           Queries                (getAllFoosQ)
 import Env
 import Control.Exception(try)
 import           Servant
 import           Servant.Server.Generic (genericServerT)
-import           Squeal.PostgreSQL      (execute, getRows)
+import           Squeal.PostgreSQL
 import Servant.Server (hoistServer)
 import System.Random
+import Queries
 
 
 
@@ -20,10 +21,16 @@ import System.Random
 -- me too badly for now.
 server :: ServerT API App
 server = genericServerT $ Routes
-  { failWithChance = \failChance -> do
+  { failWithChance = \failChance key -> do
       c <- liftIO $ randomRIO (0,1)
-      if c < failChance
-        then error "oops, we made a fucky-wucky"
+      let body  = "foo"
+      let broken = c < failChance
+      let error_code = if broken
+            then 500
+            else 200
+      runDB $ executeParams logRequest (key, body, error_code)
+      if broken
+        then error "oopsywoopsy, a fuckywucky"
         else pure NoContent
   }
 --  where run = liftIO . runApp e
