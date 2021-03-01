@@ -40,7 +40,7 @@ herokudeploy:
 	heroku container:push --recursive && heroku container:release migration web
 .PHONY: hpsql
 hpsql:
-	heroku run "psql $DATABASE_URL" --type=migration
+	heroku run "psql $${DATABASE_URL}" --type=migration
 #docker-build:
 #	@stack build
 #	@BINARY_PATH=${BINARY_PATH_RELATIVE} docker-compose build

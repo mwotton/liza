@@ -73,6 +73,9 @@ ENV LESS=-R LC_ALL=C.UTF-8 LANG=C.UTF-8 SQITCH_EDITOR=nano SQITCH_PAGER=less
 USER sqitch
 
 RUN mkdir -p $HOME/liza
-COPY . $HOME/liza
+COPY ./deploy $HOME/liza/deploy
+COPY ./revert $HOME/liza/revert
+COPY ./verify $HOME/liza/verify
+COPY ./sqitch.plan $HOME/liza/sqitch.plan
 WORKDIR $HOME/liza
 CMD sqitch deploy -t "$DATABASE_URL"

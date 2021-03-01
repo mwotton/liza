@@ -157,6 +157,13 @@ packages:
       sha256: a9fb2bafbaca65c548916e9276ad129302e0b82b7cc9a5c74d3b359a7a77d598
   original:
     hackage: postgres-options-0.2.0.0@sha256:5e2d6408ed3943f9a056b58106186397b9aa1424c56f1f26668305ce8ea2838f,1604
+- completed:
+    hackage: servant-rawm-server-1.0.0.1@sha256:bdbc14572a3ca58a8468b1ea1ccb160d77aa56702007c19b55e01e0a4a87ef11,1869
+    pantry-tree:
+      size: 285
+      sha256: bcf7ba89ef60c8d02378ceffb32580370a5a97b17fc4edc05ea420d4e8430bc4
+  original:
+    hackage: servant-rawm-server-1.0.0.1@sha256:bdbc14572a3ca58a8468b1ea1ccb160d77aa56702007c19b55e01e0a4a87ef11,1869
 snapshots:
 - completed:
     size: 563103

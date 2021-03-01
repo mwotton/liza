@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2e21335d6bfcfe65e61e586f5b26757b464ae443053c3efbfc030a02519f151f
+-- hash: dfee9e067da123eca36c5e855aee7621b3fb63c63daf3c0e514032ddfbac0cc6
 
 name:           liza
 version:        0.1.0.0
@@ -66,6 +66,7 @@ library
     , resource-pool
     , roboservant
     , servant
+    , servant-rawm-server
     , servant-server
     , squeal-postgresql
     , time
@@ -107,6 +108,7 @@ executable server
     , resource-pool
     , roboservant
     , servant
+    , servant-rawm-server
     , servant-server
     , squeal-postgresql
     , time
@@ -161,6 +163,7 @@ test-suite liza-test
     , resource-pool
     , roboservant
     , servant
+    , servant-rawm-server
     , servant-server
     , servant-validate
     , squeal-postgresql

@@ -46,7 +46,8 @@ type Tables =
 type RequestsColumns =
   '[ "id" ::: 'Def :=> 'NotNull PGint8,
      "endpoint" ::: 'NoDef :=> 'NotNull PGtext,
-     "body" ::: 'NoDef :=> 'NotNull PGtext,
+     "client_id" ::: 'NoDef :=> 'NotNull PGtext,
+     "body" ::: 'NoDef :=> 'NotNull PGbytea,
      "error_code" ::: 'NoDef :=> 'NotNull PGint4,
      "created_at" ::: 'Def :=> 'NotNull PGtimestamptz
    ]

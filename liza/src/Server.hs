@@ -14,6 +14,8 @@ import           Squeal.PostgreSQL
 import Servant.Server (hoistServer)
 import System.Random
 import Queries
+import Data.Aeson
+
 
 
 
@@ -21,19 +23,25 @@ import Queries
 -- me too badly for now.
 server :: ServerT API App
 server = genericServerT $ Routes
-  { failWithChance = \failChance key -> do
-      c <- liftIO $ randomRIO (0,1)
-      let body  = "foo"
-      let broken = c < failChance
-      let error_code = if broken
-            then 500
-            else 200
-      runDB $ executeParams logRequest (key, body, error_code)
-      if broken
-        then error "oopsywoopsy, a fuckywucky"
-        else pure NoContent
+  { failWithChance = failer
+  , fetchByEndpoint = fetcher
   }
 --  where run = liftIO . runApp e
+
+failer :: Double -> Text -> Text -> Value -> App NoContent
+failer failChance key clientId body =  do
+  c <- liftIO $ randomRIO (0,1)
+  let broken = c < failChance
+  let error_code = if broken
+        then 500
+        else 200
+  runDB $ executeParams logRequest (key, clientId, encode body, error_code)
+  if broken
+    then error "oopsywoopsy, a fuckywucky"
+    else pure NoContent
+
+
+fetcher key = runDB $ getRows =<< executeParams fetchRequestByEndpoint (Only key)
 
 hoistedServer env = hoistServer api (nt env) server
 
