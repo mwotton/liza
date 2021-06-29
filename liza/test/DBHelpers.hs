@@ -39,13 +39,14 @@ withSetup f = do
         --combinedConfig = combinedConfig' { postgresConfigFile = ("log_statement", "all") :postgresConfigFile combinedConfig' }
     Just hash <- viaNonEmpty last . lines . toText <$> do
       putStrLn "plan called"
-      (errCode, out, err) <- readCreateProcessWithExitCode (shell "cd ..; sqitch plan -f format:%h") ""
+      putStrLn =<< getCurrentDirectory
+      (errCode, out, err) <- readCreateProcessWithExitCode (shell "pwd; sqitch plan -f format:%h") ""
       if errCode == ExitSuccess
         then pure out
         else do
           dir <- getCurrentDirectory
           error (toText $ unlines ["err",toText err,"out",toText out, "dir", toText dir])
-    setCurrentDirectory ".."
+    -- setCurrentDirectory ".."
     let migrate connstr = putStrLn "migration called" >> print connstr >> callProcess "sqitch" ["deploy","-t", "db:pg:" <> BS8.unpack connstr]
     Right migratedConfig <- cacheAction ("~/.tmp-postgres/" <> toString hash)
                      (migrate . dbiConnString . toConnectionOptions  <=< dumpInfo ) combinedConfig

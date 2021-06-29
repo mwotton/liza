@@ -23,11 +23,25 @@ import Types
 -- me too badly for now.
 server :: ServerT API App
 server = genericServerT $ Routes
-  { failWithChance = failer
+  {
+
+    failWithChance = undefined -- failer
   , fetchByEndpoint = fetcher
   , healthcheck = healthcheck'
-  }
+  -- named endpoints
+--  , fetchNamedEndpoint = fetchNamedEndpoint'
+  , createNamedEndpoint = createNamedEndpoint'
+
+
+   }
 --  where run = liftIO . runApp e
+
+createNamedEndpoint' :: Text -> EndpointSpec -> App NoContent
+--createNamedEndpoint' :: Text -> Value -> App NoContent
+createNamedEndpoint' endpoint spec = undefined
+
+fetchNamedEndpoint' :: Text -> App [Problem]
+fetchNamedEndpoint' = undefined
 
 failer :: Double -> Text -> Text -> Value -> App NoContent
 failer failChance key clientId body =  do

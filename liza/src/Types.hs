@@ -12,6 +12,7 @@ import Data.Hashable
 import Data.Time
 import qualified Data.ByteString.Lazy as L
 import Squeal.PostgreSQL
+import Data.Hashable.Time()
 
 data RequestLog
   = RequestLog
@@ -25,7 +26,36 @@ data RequestLog
   deriving stock (Show, GHC.Generic, Eq)
   deriving anyclass (SOP.Generic, SOP.HasDatatypeInfo)
 
--- instance Hashable RequestLog
+
+
+
+
+newtype Seconds = Seconds Int
+  deriving (Generic,Eq)
+  deriving anyclass (Hashable)
+
+instance FromJSON Seconds
+
+data Limit
+  = Limit
+    { limitSeconds :: Int
+    , limitMaxHooks :: Int
+    }
+  deriving (Generic,Eq)
+  deriving anyclass (Hashable)
+instance FromJSON Limit
+instance ToJSON Limit
+
+data EndpointSpec
+  = EndpointSpec
+    { failChance :: Double
+    , limits :: [Limit]
+    }
+  deriving Generic
+  deriving anyclass (Hashable)
+instance FromJSON EndpointSpec
+
+instance Hashable RequestLog
 instance ToJSON RequestLog
 instance FromJSON RequestLog
 
@@ -33,7 +63,7 @@ data Problem
   = PMultipleDelivery MultipleDelivery
   | PFailedToRetry -- currently unimplemented
   deriving stock (Show, GHC.Generic, Eq)
-  deriving anyclass (SOP.Generic, SOP.HasDatatypeInfo)
+  deriving anyclass (SOP.Generic, SOP.HasDatatypeInfo, Hashable)
 instance ToJSON Problem
 instance FromJSON Problem
 
@@ -46,7 +76,7 @@ data MultipleDelivery =
 --  , successes :: AttemptList
   }
   deriving stock (Show, GHC.Generic, Eq)
-  deriving anyclass (SOP.Generic, SOP.HasDatatypeInfo)
+  deriving anyclass (SOP.Generic, SOP.HasDatatypeInfo, Hashable)
   deriving (IsPG, FromPG) via (Composite MultipleDelivery)
 
 instance ToJSON MultipleDelivery

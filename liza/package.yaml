@@ -24,6 +24,7 @@ dependencies:
 - exceptions
 - generics-sop
 - hashable
+- hashable-time
 - honeycomb
 - honeycomb-wai
 - http-types
@@ -88,3 +89,4 @@ tests:
     - QuickCheck
     - pretty-simple
     - servant-validate
+    - servant-flatten

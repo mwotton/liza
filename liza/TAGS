@@ -1,61 +1,73 @@
 
-./app/Main.hs,190
-module Main Main2,3
-main main19,20
-main main20,21
-setupMiddleware setupMiddleware26,27
-setupMiddleware setupMiddleware27,28
-app app39,40
-app app40,41
-nt nt42,43
-nt nt43,44
+./test/DBHelpers.hs,252
+module DBHelpers DBHelpers4,5
+withEnv withEnv23,24
+withEnv withEnv24,25
+withSetup withSetup30,31
+withSetup withSetup31,32
+dumpInfo dumpInfo57,58
+dumpInfo dumpInfo58,59
+dbiConnString dbiConnString63,64
+dbiConnString dbiConnString64,65
+
+./test/PreflightSpec.hs,178
+module PreflightSpec PreflightSpec1,2
+runCommand runCommand7,8
+runCommand runCommand8,9
+succeeds succeeds10,11
+succeeds succeeds11,12
+spec spec21,22
+spec spec22,23
+
+./test/RoboservantSpec.hs,78
+module RoboservantSpec RoboservantSpec5,6
+spec spec35,36
+spec spec36,37
+
+./test/AroundAll.hs,82
+module AroundAll AroundAll2,3
+aroundAll aroundAll7,8
+aroundAll aroundAll8,9
+
+./test/Spec.hs,0
+
+./test/DBSpec.hs,56
+module DBSpec DBSpec0,1
+spec spec5,6
+spec spec6,7
+
+./test/CompileTimeApiSpec.hs,175
+module CompileTimeApiSpec CompileTimeApiSpec1,2
+testApi testApi7,8
+testApi testApi8,9
+validTestApi validTestApi10,11
+validTestApi validTestApi11,12
+spec spec13,14
+
+./src/Server.hs,472
+module Server Server3,4
+server server23,24
+server server24,25
+createNamedEndpoint' createNamedEndpoint'38,39
+--createNamedEndpoint' --createNamedEndpoint'39,40
+createNamedEndpoint' createNamedEndpoint'40,41
+fetchNamedEndpoint' fetchNamedEndpoint'42,43
+fetchNamedEndpoint' fetchNamedEndpoint'43,44
+failer failer45,46
+failer failer46,47
+fetcher fetcher58,59
+healthcheck' healthcheck'61,62
+hoistedServer hoistedServer65,66
+nt nt67,68
+nt nt68,69
+
+./src/Lib.hs,65
+module LibLib0,1
+someFunc someFunc5,6
+someFunc someFunc6,7
 
 ./src/Prelude.hs,27
 module PreludePrelude0,1
-
-./src/Queries.hs,92
-module Queries Queries10,11
-getAllFoosQ getAllFoosQ16,17
-getAllFoosQ getAllFoosQ17,18
-
-./src/Auth.hs,162
-module Auth Auth2,3
-genAuthMiddleware genAuthMiddleware14,15
-genAuthMiddleware genAuthMiddleware15,16
-addLogout addLogout22,23
-addLogout addLogout23,24
-
-./src/Server.hs,98
-module Server Server2,3
-server server15,16
-server server16,17
-api api22,23
-api api23,24
-
-./src/API.hs,162
-type API API11,12
-data Routes Routes13,14
-  = RoutesRoutes14,15
-      { getFoos getFoos15,16
-      , someInt someInt17,18
-api api22,23
-api api23,24
-
-./src/Schema.hs,410
-type PGcidr PGcidr18,19
-type PGltree PGltree20,21
-type PGltxtquery PGltxtquery22,23
-type PGlquery PGlquery24,25
-type DB DB26,27
-type Schema Schema28,29
-type Enums Enums33,34
-type Tables Tables37,38
-type FoosColumns FoosColumns43,44
-type FoosConstraints FoosConstraints48,49
-type FoosTable FoosTable50,51
-type Views Views53,54
-type Functions Functions57,58
-type Domains Domains60,61
 
 ./src/Manager.hs,265
 module Manager Manager7,8
@@ -69,15 +81,59 @@ runApp runApp53,54
 runDB runDB55,56
 runDB runDB56,57
 
-./src/Error.hs,70
-module Error Error1,2
-sqlError sqlError6,7
-sqlError sqlError7,8
+./src/API.hs,282
+type API API13,14
+data Routes Routes15,16
+  = RoutesRoutes16,17
+        createNamedEndpointcreateNamedEndpoint18,19
+      , failWithChancefailWithChance28,29
+      , fetchByEndpointfetchByEndpoint42,43
+      , healthcheckhealthcheck47,48
+api api54,55
+api api55,56
 
-./src/Lib.hs,65
-module LibLib0,1
-someFunc someFunc5,6
-someFunc someFunc6,7
+./src/Schema.hs,468
+type PGltree PGltree17,18
+type PGcidr PGcidr19,20
+type PGltxtquery PGltxtquery21,22
+type PGlquery PGlquery23,24
+type DB DB25,26
+type Schema Schema27,28
+type Enums Enums32,33
+type Composites Composites35,36
+type Tables Tables39,40
+type RequestsColumns RequestsColumns45,46
+type RequestsConstraints RequestsConstraints54,55
+type RequestsTable RequestsTable56,57
+type Views Views59,60
+type Functions Functions63,64
+type Domains Domains66,67
+
+./src/Env.hs,257
+instance instance13,14
+withEnv withEnv20,21
+withEnv withEnv21,22
+data EnvEnv29,30
+  = EnvEnv30,31
+      { connectionPool connectionPool31,32
+      , appHoneycomb appHoneycomb32,33
+      , appHoneycombSpanContext appHoneycombSpanContext33,34
+
+./src/Queries.hs,304
+module Queries Queries11,12
+logRequest logRequest19,20
+logRequest logRequest20,21
+fetchRequestByEndpoint fetchRequestByEndpoint30,31
+fetchRequestByEndpoint fetchRequestByEndpoint31,32
+fetchMultipleDeliveries fetchMultipleDeliveries42,43
+fetchMultipleDeliveries fetchMultipleDeliveries43,44
+
+./src/Auth.hs,162
+module Auth Auth2,3
+genAuthMiddleware genAuthMiddleware14,15
+genAuthMiddleware genAuthMiddleware15,16
+addLogout addLogout22,23
+addLogout addLogout23,24
 
 ./src/Config.hs,348
 data Config Config20,21
@@ -91,40 +147,43 @@ configFromEnv configFromEnv28,29
 parseGithubProvider parseGithubProvider45,46
 parseGithubProvider parseGithubProvider46,47
 
-./src/Env.hs,257
-instance instance13,14
-withEnv withEnv20,21
-withEnv withEnv21,22
-data EnvEnv29,30
-  = EnvEnv30,31
-      { connectionPool connectionPool31,32
-      , appHoneycomb appHoneycomb32,33
-      , appHoneycombSpanContext appHoneycombSpanContext33,34
+./src/Error.hs,70
+module Error Error1,2
+sqlError sqlError6,7
+sqlError sqlError7,8
 
-./src/Types.hs,107
-module Types Types4,5
-data FooFoo10,11
-  = FooFoo11,12
-      { id id12,13
-      , name name13,14
+./src/Types.hs,867
+module Types Types5,6
+data RequestLogRequestLog16,17
+  = RequestLogRequestLog17,18
+      { id id18,19
+      , endpoint endpoint19,20
+      , client_id client_id20,21
+      , error_code error_code22,23
+      , created_at created_at23,24
+newtype Seconds Seconds32,33
+newtype Seconds = Seconds Seconds32,33
+data LimitLimit38,39
+  = LimitLimit39,40
+    { limitSeconds limitSeconds40,41
+    , limitMaxHooks limitMaxHooks41,42
+data EndpointSpecEndpointSpec48,49
+  = EndpointSpecEndpointSpec49,50
+    { failChance failChance50,51
+    , limits limits51,52
+data ProblemProblem61,62
+  = PMultipleDelivery PMultipleDelivery62,63
+  | PFailedToRetry PFailedToRetry63,64
+data MultipleDelivery MultipleDelivery70,71
+  MultipleDeliveryMultipleDelivery71,72
+  { targeted_endpoint targeted_endpoint72,73
+  , attempt_id attempt_id73,74
 
-./test/DBSpec.hs,56
-module DBSpec DBSpec0,1
-spec spec6,7
-spec spec7,8
-
-./test/Spec.hs,0
-
-./test/PreflightSpec.hs,178
-module PreflightSpec PreflightSpec1,2
-runCommand runCommand7,8
-runCommand runCommand8,9
-succeeds succeeds10,11
-succeeds succeeds11,12
-spec spec21,22
-spec spec22,23
-
-./test/AroundAll.hs,82
-module AroundAll AroundAll2,3
-aroundAll aroundAll7,8
-aroundAll aroundAll8,9
+./app/Main.hs,164
+module Main Main2,3
+main main19,20
+main main20,21
+setupMiddleware setupMiddleware26,27
+setupMiddleware setupMiddleware27,28
+app app39,40
+app app40,41

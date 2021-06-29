@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: dfee9e067da123eca36c5e855aee7621b3fb63c63daf3c0e514032ddfbac0cc6
+-- hash: 5a61669fc42c5fbcb4f238168353f0dffbb378d403668d8f05488c35c7751edd
 
 name:           liza
 version:        0.1.0.0
@@ -51,6 +51,7 @@ library
     , exceptions
     , generics-sop
     , hashable
+    , hashable-time
     , honeycomb
     , honeycomb-wai
     , hspec
@@ -92,6 +93,7 @@ executable server
     , exceptions
     , generics-sop
     , hashable
+    , hashable-time
     , honeycomb
     , honeycomb-wai
     , hspec
@@ -144,6 +146,7 @@ test-suite liza-test
     , exceptions
     , generics-sop
     , hashable
+    , hashable-time
     , hedgehog
     , honeycomb
     , honeycomb-wai
@@ -163,6 +166,7 @@ test-suite liza-test
     , resource-pool
     , roboservant
     , servant
+    , servant-flatten
     , servant-rawm-server
     , servant-server
     , servant-validate
